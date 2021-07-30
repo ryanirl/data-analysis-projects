@@ -11,7 +11,7 @@ Link to Notebook: https://github.com/ryanirl/data-analysis-projects/blob/main/cr
 Notebook covering the Data Gathering, Cleaning, EDA, Feature Engineering, and Model Prediction of Used Car Prices. Data was
 gathered here: https://www.kaggle.com/austinreese/craigslist-carstrucks-data and inspired by my first ever Python 
 project (https://github.com/ryanirl/CraigslistScraper). Random Forest Regressor (vanilla) was the best performing model and managed to achieve
-an R2 Score of 0.933. 
+an R2 Score of 0.931. 
 
 
 **Models Evaluated & Performance:**
