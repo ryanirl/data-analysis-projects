@@ -4,14 +4,13 @@
 
 ## 1. Car EDA & Price Prediction
 
-**NOTE:** UPDATE LINKS
-
 Link to Notebook: https://github.com/ryanirl/data-analysis-projects/blob/main/car_price_prediction/car_price_prediction.ipynb
 
-Notebook covering the Data Gathering, Cleaning, EDA, Feature Engineering, and Model Prediction of Used Car Prices. Data was
-gathered here: https://www.kaggle.com/austinreese/craigslist-carstrucks-data and inspired by my first ever Python 
-project (https://github.com/ryanirl/CraigslistScraper). Random Forest Regressor (vanilla) was the best performing model and managed to achieve
-an R2 Score of 0.931. 
+Notebook covering the data gathering, cleaning, EDA, feature engineering, and model prediction of automobile prices. This project was 
+inspired by my first every python project (https://github.com/ryanirl/CraigslistScraper), though the actual dataset used in the notebook is 
+a kaggle dataset found here: https://www.kaggle.com/austinreese/craigslist-carstrucks-data. Big shout out to Austin Reese for taking the
+time to compile this dataset and make it public as it contains 400,000+ datapoints. Random Forest Regressor (vanilla) was the best performing 
+model and managed to achieve an R2 Score of 0.931. 
 
 
 **Models Evaluated & Performance:**
