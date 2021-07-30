@@ -6,7 +6,7 @@
 
 **NOTE:** UPDATE LINKS
 
-Link to Notebook: https://github.com/ryanirl/data-analysis-projects/blob/main/craigslist_price_prediction/cleaning_data.ipynb
+Link to Notebook: https://github.com/ryanirl/data-analysis-projects/blob/main/car_price_prediction/car_price_prediction.ipynb
 
 Notebook covering the Data Gathering, Cleaning, EDA, Feature Engineering, and Model Prediction of Used Car Prices. Data was
 gathered here: https://www.kaggle.com/austinreese/craigslist-carstrucks-data and inspired by my first ever Python 
