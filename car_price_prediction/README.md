@@ -11,13 +11,13 @@ model and managed to achieve an R2 Score of 0.931.
 
 <br />
 
-| Model | R2 Score | MAE Score |
-| --- | --- | --- |
-| Random Forest Regressor | 1570.125 | 0.931 |
-| XGBoost Regressor | 2368.176 | 0.902 |
-| LightGBM Regressor | 2629.613 | 0.886 |
-| K-Nearest Regressor | 2973.658 | 0.829 |
-| Linear Regression | 3989.318 | 0.794 |
+| Model                   | MAE Score | R2 Score |
+| ----------------------- | --------- | -------- |
+| Random Forest Regressor | 1570.125  | 0.931    |
+| XGBoost Regressor       | 2368.176  | 0.902    |
+| LightGBM Regressor      | 2629.613  | 0.886    |
+| K-Nearest Regressor     | 2973.658  | 0.829    |
+| Linear Regression       | 3989.318  | 0.794    |
 
 <br />
 
