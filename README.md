@@ -41,9 +41,18 @@ SKLearn, SciPy, and categorical_encoders
 
 ## 2. Cell Instance Segmentation
 
+**WORK IN PROGRESS**
+
 Link to Repo: https://github.com/ryanirl/data-analysis-projects/blob/main/cell_instance_segmentation
 
 **Models Evaluated & Performance:**
+
+In depth analysis of Model Performance and Postprocessing techniques can be 
+found here:
+
+*ADD LINK*
+
+### Evaluation Metric:
 
 We evaluate the Precision of the IoU at different thresholds in the range 
 [0.5, 0.95] with a step size of 0.05, and then took the Mean Average of 
@@ -53,28 +62,26 @@ NOTES: To understand the low AP scores at an IoU threshold of 0.9 consider
 reading this discussion:
 https://www.kaggle.com/c/sartorius-cell-instance-segmentation/discussion/281205
 
-**CV Scores:**
+**Scores:**
 
-| Model                 | AP @ IoU 0.5 | AP @ IoU 0.75 | AP @ IoU 0.9 | MAP IoU @ [0.5, 1] | 
-| --------------------- | ------------ | ------------- | ------------ | ------------------ |
-| Mask R-CNN R50-FPN    | NONE         | NONE          | NONE         | NONE               | 
-| CellPose w/ SizeModel | NONE         | NONE          | NONE         | NONE               | 
-
-**LB Scores:**
-
-| Model                 | MAP IoU @ [0.5, 1] | 
-| --------------------- | ------------------ |
-| Mask R-CNN R50-FPN    | NONE               | 
-| CellPose w/ SizeModel | NONE               | 
+| Model                 | AP @ IoU 0.5 | AP @ IoU 0.75 | AP @ IoU 0.9 | MAP IoU @ [0.5, 1] | LB Public | 
+| --------------------- | ------------ | ------------- | ------------ | ------------------ | --------- | 
+| Mask R-CNN R50-FPN    | 0.5644       | 0.2650        | 0.0125       | 0.2893             | 0.306     | 
+| CellPose w/ SizeModel | 0.6187       | 0.2491        | 0.0103       | 0.2975             | 0.312     | 
 
 
-<br />
+**Cell Specific Scores (CV):**
+
+| Model                 | Cort   | SH-SY5Y | Astrocyte | 
+| --------------------- | ------ | ------- | --------- |
+| Mask R-CNN R50-FPN    | 0.3869 | 0.1879  | 0.1914    | 
+| CellPose w/ SizeModel | 0.3924 | 0.2274  | 0.1865    |
 
 
 **Sample Predictions:**
 
-| Image Type     | SH-SY5Y                         | Astrocyte                      | Cort                          | 
-| -------------- |:-------------------------------:|:------------------------------:|:-----------------------------:|
+| Image Type     | SH-SY5Y                        | Astrocyte                     | Cort                         | 
+| -------------- |:------------------------------:|:-----------------------------:|:----------------------------:|
 | Cell Images    | ![](./img/shsy5y_image_2.png)  | ![](./img/astro_image_1.png)  | ![](./img/cort_image_1.png)  |
 | Actual Mask    | ![](./img/shsy5y_actual_2.png) | ![](./img/astro_actual_1.png) | ![](./img/cort_actual_1.png) |
 
@@ -84,7 +91,6 @@ https://www.kaggle.com/c/sartorius-cell-instance-segmentation/discussion/281205
 
 **Dependencies:** Pandas, Numpy, Matplotlib, SKLearn, SciPy, detectron2,
 PyYAML, cv2, PyTorch, pycocotools, fastcore, joblib, and tqdm.
-
 
 ---
 
