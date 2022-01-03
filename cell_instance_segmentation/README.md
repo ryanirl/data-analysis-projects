@@ -2,9 +2,9 @@
 
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
-* [Goals](#goals)
 * [Data](#data)
 * [Performance](#evaluation-metric)
+* [Interesting Findings](#interesting-findings)
 * [License](#license)
 
 Follows from the Kaggle competition here:
@@ -13,47 +13,24 @@ https://www.kaggle.com/c/sartorius-cell-instance-segmentation
 **Dependencies:** Pandas, Numpy, Matplotlib, SKLearn, SciPy, detectron2,
 PyYAML, cv2, CellPose, PyTorch, pycocotools, fastcore, joblib, and tqdm.
 
-
-<!-- Goals -->
-## Goals:
-
-I've always found kaggle fascinating but never tried to compete in a competition. 
-And so, as an introduction to the Kaggle community I decided to join a competition 
-and learn by doing. My goals for this competition are as follows: 
-
-Goals:
-1. Build a baseline SOTA model with miminal parameter optimization through prebuild 
-libraries, in this case those libaries consist of Detectron2 and Cellpose. 
-2. Explore data and make model optimizing decisions based on findings. 
-3. Analize the strengths and weeknesses of current SOTA models / methods.
-4. Analyze the top couple winning or any interesting submissions to get an baseline 
-understanding of what I must do differently to be a strong competitor in a Kaggle 
-competition.
-
 ---
 
 <!-- DATA -->
 ## Data:
 
-TODO:
- - List data format and keep it simple
- - Post some findings and how I transfered them to model optimizations
- - Examples of image, mask, and prediction.
-
-
 Data in this competition was given in the form of Testing, Training, Train Semi
 Supervised and LIVECELL Data. 
 
 The Training, Testing, and Train Semi Supervised data consist of 3 cell types:
-1. Astroctyes (astro)
-2. SH-SY5Y (shsy5y)
-3. Cort (cort)
+1. Astroctyes ("astro")
+2. SH-SY5Y ("shsy5y")
+3. Cort ("cort")
 
-Though the competition is only based on the 3 cell types listed above, the predecessor
-to this dataset is the LIVECELL dataset which containing 8 Cell Types, including the 
-SH-SY5Y cell line but not the Astro or Cort cell line. The SH-SY5Y data in the LIVECELL 
-Data IS seperate from the data we are given in the competition. The other 7 Cell Types 
-in the LIVECELL Data are:
+Though in this competition we're only tested on the 3 cell types listed above, the predecessor
+to competition dataset, the LIVECELL dataset, is also given and contains 8 Cell Types. Of the 8 
+extra cell lines, the only one that overlaps with the training data is the SH-SY5Y cell line. 
+The SH-SY5Y data in the LIVECELL Dataset IS seperate from the data we are given in the competition. 
+The other 7 Cell Types in the LIVECELL Data are:
 1. A172
 2. BT474
 3. BV-2
@@ -62,12 +39,11 @@ in the LIVECELL Data are:
 6. SkBr3
 7. SK-OV-3
 
-
 The extra data in the LIVECELL dataset will almost surely be utilized in training to 
-acheive high scores on the Testing set, some ideas include:
-1. Combining the addition data from the SH-SY5Y cell line to the data in the Training set.
-2. First Training on the larger LIVECELL dataset then Transer Learning that model to the
-original training set. 
+acheive high scores, some ideas include:
+1. Combining the addition data from the SH-SY5Y cell line in the LIVECELL dataset.
+2. First Training on the larger LIVECELL dataset then Transer Learning that model to 
+the original training set. 
 
 
 ---
@@ -92,10 +68,10 @@ https://www.kaggle.com/c/sartorius-cell-instance-segmentation/discussion/281205
 
 **Scores:**
 
-| Model                 | AP @ IoU 0.5 | AP @ IoU 0.75 | AP @ IoU 0.9 | MAP IoU @ [0.5, 1] | LB Public | 
-| --------------------- | ------------ | ------------- | ------------ | ------------------ | --------- | 
-| Mask R-CNN R50-FPN    | 0.5644       | 0.2650        | 0.0125       | 0.2893             | 0.306     | 
-| CellPose w/ SizeModel | 0.6187       | 0.2491        | 0.0103       | 0.2975             | 0.312     | 
+| Model                 | AP @ IoU<br>0.5 | AP @ IoU<br>0.75 | AP @ IoU<br>0.9 | MAP IoU @<br>[0.5, 0.95] | LB Public | 
+| --------------------- | --------------- | ---------------- | --------------- | ------------------------ | --------- | 
+| Mask R-CNN R50-FPN    | 0.5644          | 0.2650           | 0.0125          | 0.2893                   | 0.306     | 
+| CellPose w/ SizeModel | 0.6187          | 0.2491           | 0.0103          | 0.2975                   | 0.312     | 
 
 
 **Cell Specific Scores (CV):**
@@ -106,22 +82,34 @@ https://www.kaggle.com/c/sartorius-cell-instance-segmentation/discussion/281205
 | CellPose w/ SizeModel | 0.3924 | 0.2274  | 0.1865    |
 
 
-**Interesting Findings:** 
-- Both the Mask R-CNN and the Cellpose Model (which is based off of a UNet) had positive LB correlation.
-- On my local CV Cellpose performs slighly better on the SH-SY5Y and Cort cell line.
-    - When I dug into this it turned out Cellpose is better than Mask R-CNN at classifying cells that are
-    close together. This may be do to the larger Archor Size I set on the Mask R-CNN. 
-
-- Mask R-CNN performs better on the Astrocyte cell line. This was do to Cellpose Astro predictions being more 
-irregular and jittery shaped where the Mask R-CNN being able to classify cirular shapes better (more on this 
-here: *add link*)
-
-
 **Side Note:**
 
 Though in my analysis I only show the IoU Score at an AP of [0.5, 0.75, 0.9], the public LB 
-is calculated through MAP's of [0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9], I just
-didn't feel the need to list each one in my analysis.
+is calculated through MAP's of [0.5, 0.55, ..., 0.9, 0.95], I just didn't feel the need to 
+list each one in my analysis.
+
+
+**Sample Predictions:**
+
+![](./img/astro_analysis_annotated.png)
+
+---
+
+<!-- Interesting Findings -->
+## Interesting Findings
+- A lot of the Astrocyte annotations are not pixel perfect and some are even near broken.
+- Both the Mask R-CNN and the Cellpose Model (which is based off of a UNet) had positive LB correlation. 
+Probably due to a larger distribution of the Cort cell line in the Public LB dataset.
+- On my local CV Cellpose performs slighly better on the SH-SY5Y and Cort cell line. Though on the Private
+LB the Mask R-CNN Model performed better than my Cellpose model by 0.006. 
+    - When I dug into this it seems like Cellpose is better than minimally optimized Mask R-CNN at classifying 
+    cells that are close together, but worse at per-pixel predictions. My guess would be that in the private 
+    LB, the Cort images they used were more spread out and not as bunched together as my validation set. 
+
+- The Mask R-CNN performs better on the Astrocyte cell line. From my inferences Cellpose Astro predictions were more 
+large, irregular, and jittery shaped leading to FP's where the Mask R-CNN being able to smooth classify cirular shapes 
+better but had more FN's. This difference probably has something to do with the fact that Cellpose is predicting 
+gradient flows and not the mask directly.
 
 
 ---

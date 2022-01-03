@@ -18,7 +18,6 @@ best performing model and managed to achieve an R2 Score of 0.931.
 
 **Models Evaluated & Performance:**
 
-<br />
 
 | Model                   | MAE Score | R2 Score |
 | ----------------------- | --------- | -------- |
@@ -64,10 +63,10 @@ https://www.kaggle.com/c/sartorius-cell-instance-segmentation/discussion/281205
 
 **Scores:**
 
-| Model                 | AP @ IoU 0.5 | AP @ IoU 0.75 | AP @ IoU 0.9 | MAP IoU @ [0.5, 1] | LB Public | 
-| --------------------- | ------------ | ------------- | ------------ | ------------------ | --------- | 
-| Mask R-CNN R50-FPN    | 0.5644       | 0.2650        | 0.0125       | 0.2893             | 0.306     | 
-| CellPose w/ SizeModel | 0.6187       | 0.2491        | 0.0103       | 0.2975             | 0.312     | 
+| Model                 | AP @ IoU<br>0.5 | AP @ IoU<br>0.75 | AP @ IoU<br>0.9 | MAP IoU @<br>[0.5, 0.95] | LB Public | 
+| --------------------- | --------------- | ---------------- | --------------- | ------------------------ | --------- | 
+| Mask R-CNN R50-FPN    | 0.5644          | 0.2650           | 0.0125          | 0.2893                   | 0.306     | 
+| CellPose w/ SizeModel | 0.6187          | 0.2491           | 0.0103          | 0.2975                   | 0.312     | 
 
 
 **Cell Specific Scores (CV):**
@@ -76,14 +75,6 @@ https://www.kaggle.com/c/sartorius-cell-instance-segmentation/discussion/281205
 | --------------------- | ------ | ------- | --------- |
 | Mask R-CNN R50-FPN    | 0.3869 | 0.1879  | 0.1914    | 
 | CellPose w/ SizeModel | 0.3924 | 0.2274  | 0.1865    |
-
-
-**Sample Predictions:**
-
-| Image Type     | SH-SY5Y                        | Astrocyte                     | Cort                         | 
-| -------------- |:------------------------------:|:-----------------------------:|:----------------------------:|
-| Cell Images    | ![](./img/shsy5y_image_2.png)  | ![](./img/astro_image_1.png)  | ![](./img/cort_image_1.png)  |
-| Actual Mask    | ![](./img/shsy5y_actual_2.png) | ![](./img/astro_actual_1.png) | ![](./img/cort_actual_1.png) |
 
 
 <br />
