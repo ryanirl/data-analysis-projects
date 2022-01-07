@@ -51,10 +51,54 @@ the original training set.
 <!-- Performance -->
 ## Models Evaluated & Performance
 
-In depth analysis of Model Performance and Postprocessing techniques can be 
-found here:
+In depth analysis of Model Performance can be found here:
 
-*ADD LINK*
+https://github.com/ryanirl/data-analysis-projects/blob/main/cell_instance_segmentation/MODEL_PERFOMANCE.md
+
+### Training Technique:
+
+**Mask R-CNN R50 FPN:**
+
+Each trained multiple models, here are details about my highest performing model. Each model was first trained
+on the LIVECELL Dataset then transfered to the smaller Sartorius Dataset. This gave me a 2% improvement overall
+from models that weren't first trained on LIVECELL.
+
+**Training Details:**
+- Epochs: 100 -> 50 (100 on LIVECELL -> 50 on Sartorius)
+- Batch Size: 2
+- LR: 0.0005
+- Resize Max Size: 1333 (default)
+- Resize Min Size: (640, 672, 704, 736, 768, 800) (default)
+- Anchor Generator Size: [[32], [64], [128], [256], [512]] (default)
+- N Classes: 8 -> 3 
+- Detections per Image: 1000
+
+
+**Inference Details:**
+
+- Custom NMS: 
+    - Astrocyte: 0.4
+    - SH-SY5Y: 0.25
+    - Cort: 0.7
+
+- Custom Score Thresholding: 
+    - Astrocyte: 0.4 
+    - SH-SY5Y: 0.15
+    - Cort: 0.55
+
+- Custom Per Pixel Score Thresholding: 
+    - Astrocyte: 0.45
+    - SH-SY5Y: 0.5
+    - Cort: 0.45
+
+
+**See here for more details:**
+
+Training: https://github.com/ryanirl/data-analysis-projects/blob/main/cell_instance_segmentation/src/d2_train.py
+
+Inferance: https://github.com/ryanirl/data-analysis-projects/blob/main/cell_instance_segmentation/src/detectron2_src/d2_config.yaml
+
+
 
 ### Evaluation Metric:
 
@@ -98,9 +142,6 @@ list each one in my analysis.
 <!-- Interesting Findings -->
 ## Interesting Findings
 
-
-Cellpose
-
 - A lot of the Astrocyte annotations are NOT pixel perfect and some I would even consider broken. 
 - Both the Mask R-CNN and the Cellpose Model (which is based off of a UNet) had positive LB correlation. 
 Probably due to a larger distribution of the Cort cell line in the public LB dataset.
@@ -114,6 +155,18 @@ LB the Mask R-CNN Model performed better than my Cellpose model by 0.006.
 larger, irregular, and jittery shaped leading to FP's where the Mask R-CNN was able to classify smoother cirular shapes 
 better but had more FN's. This difference probably has something to do with the fact that Cellpose is predicting 
 gradient flows and not the mask directly.
+- The Mask R-CNN on the SH-SY5Y cell line had significantly more FN's than Cellpose. From my experience this is because 
+of how cells are in each image and how bunched together the they are. 
+
+
+<!-- Improving -->
+## Ideas for Improvment:
+
+**WORK IN PROGESS**
+
+- Better / Smarter BBox Proposal
+- Larger Resize of Images
+- U-Net replacing Mask Head
 
 
 ---
