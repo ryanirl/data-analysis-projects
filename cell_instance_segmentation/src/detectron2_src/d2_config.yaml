@@ -1,0 +1,28 @@
+0:
+  class_name: "shsy5y"
+  min_area: 80
+  max_area: 600
+  score_threshold: 0.15
+  nms: 0.25
+  pixel_score: 0.5
+  dilation: False
+
+1:
+  class_name: "astro"
+  min_area: 150
+  max_area: 10000
+  score_threshold: 0.40
+  nms: 0.40
+  pixel_score: 0.45
+  dilation: False
+
+2:
+  class_name: "cort"
+  score_threshold: 0.55
+  min_area: 77
+  max_area: 470
+  nms: 0.7
+  pixel_score: 0.45
+  dilation: True
+
+
