@@ -97,17 +97,21 @@ list each one in my analysis.
 
 <!-- Interesting Findings -->
 ## Interesting Findings
-- A lot of the Astrocyte annotations are not pixel perfect and some are even near broken.
-- Both the Mask R-CNN and the Cellpose Model (which is based off of a UNet) had positive LB correlation. 
-Probably due to a larger distribution of the Cort cell line in the Public LB dataset.
-- On my local CV Cellpose performs slighly better on the SH-SY5Y and Cort cell line. Though on the Private
-LB the Mask R-CNN Model performed better than my Cellpose model by 0.006. 
-    - When I dug into this it seems like Cellpose is better than minimally optimized Mask R-CNN at classifying 
-    cells that are close together, but worse at per-pixel predictions. My guess would be that in the private 
-    LB, the Cort images they used were more spread out and not as bunched together as my validation set. 
 
-- The Mask R-CNN performs better on the Astrocyte cell line. From my inferences Cellpose Astro predictions were more 
-large, irregular, and jittery shaped leading to FP's where the Mask R-CNN being able to smooth classify cirular shapes 
+
+Cellpose
+
+- A lot of the Astrocyte annotations are NOT pixel perfect and some I would even consider broken. 
+- Both the Mask R-CNN and the Cellpose Model (which is based off of a UNet) had positive LB correlation. 
+Probably due to a larger distribution of the Cort cell line in the public LB dataset.
+- On my local CV, Cellpose performs slighly better on the SH-SY5Y and Cort cell line. Though on the private
+LB the Mask R-CNN Model performed better than my Cellpose model by 0.006. 
+    - When I dug into this it seems like Cellpose is better than my minimally optimized Mask R-CNN at classifying 
+    cells that are close together, but worse at per-pixel predictions. My guess would be that in the private 
+    LB, the Cort samples were more spread out and not as bunched together as my validation set. 
+
+- The Mask R-CNN performs better on the Astrocyte cell line. From my inferences Cellpose Astro predictions were
+larger, irregular, and jittery shaped leading to FP's where the Mask R-CNN was able to classify smoother cirular shapes 
 better but had more FN's. This difference probably has something to do with the fact that Cellpose is predicting 
 gradient flows and not the mask directly.
 
