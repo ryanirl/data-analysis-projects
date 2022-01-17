@@ -44,9 +44,8 @@ PyYAML, cv2, Cellpose, PyTorch, pycocotools, fastcore, joblib, and tqdm.
 <!-- Models Evaluated and Performance -->
 ### Models Evaluated & Performance
 
-More detailed tables of my Model Performance can be found here:
-
-https://github.com/ryanirl/data-analysis-projects/blob/main/cell_instance_segmentation/MODEL_PERFORMANCE.md
+More detailed tables of my Model Performance can be found 
+[here](https://github.com/ryanirl/data-analysis-projects/blob/main/cell_instance_segmentation/MODEL_PERFORMANCE.md):
 
 
 #### Evaluation Metric:
@@ -93,10 +92,9 @@ my analysis.
 * [Annotations are NOT Pixel Perfect](#keypoint-annotations)
 * [There is an Uneven Distribution of Cell Types](#keypoint-distribution)
 * [Cellpose is Good at Identifying Instances But Not at Pixel Perfect Predictions](#keypoint-cellpose-pp)
+* Work in progress...
 
 See a detailed analysis of each *Key Finding* below. 
-
-<br />
 
 ---
 
@@ -141,7 +139,9 @@ some I would even consider potentially damaging to a models perforance. The
 main recuring problem I saw with astrocyte masks was that some were hollow. As
 an example: 
 
-![](./img/annotation_not_pp_examples/hollow_artifact.png)
+<p align="center">
+ <img src="./img/annotation_not_pp_examples/hollow_artifact.png" width="65%">
+</p>
 
 This lead some people to try and *clean* these astro masks [[4]](#4). Though
 one problem discussed, if these problems lie in the training set then they also
