@@ -25,3 +25,18 @@ model and managed to achieve an R2 Score of 0.931.
 **Dependencies:** Pandas, Numpy, Seaborn, Matplotlib, XGBoost, LightGBM, SKLearn, SciPy, and categorical_encoders 
 
 
+---
+
+<!-- LICENSE -->
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+
+<br />
+
+
+
+
+
+
