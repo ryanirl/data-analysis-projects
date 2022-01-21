@@ -20,12 +20,10 @@ individual cells.
 * [Summary](#Summary)
     * [Models Evaluated & Performance](#models-evaluated-and-performance)
     * [Key Findings](#key-findings0)
-* [Detailed Analysis](#detailed-analysis)
-    * [Key Findings](#key-findings1)
+* [Competition Information](#information)
     * [Data](#data)
     * [Training Information](#training-information)
-    * [Analysis of Winning Solutions](#winning-solutions)
-    * [Ideas for Improving](#improving)
+    * [Winning Solutions](#winning-solutions)
 * [References](#references)
 * [License](#license)
 
@@ -86,67 +84,51 @@ my analysis.
 
 ---
 
-<!-- Key Findings0 -->
+<!-- Key Findings -->
 ### Key Findings: 
-* [Accurate BBox Proposals are KEY](#keypoint-bbox)
-* [Annotations are NOT Pixel Perfect](#keypoint-annotations)
-* [There is an Uneven Distribution of Cell Types](#keypoint-distribution)
-* [Cellpose is Good at Identifying Instances But Not at Pixel Perfect Predictions](#keypoint-cellpose-pp)
-* Work in progress...
 
-See a detailed analysis of each *Key Finding* below. 
+Expand each key finding for a detailed analysis of each. 
 
----
+<details>
+   <summary><b>Accurate BBox Proposals are KEY:</b></summary>
 
-<!-- Detailed Analysis -->
-## Detailed Analysis:
-* [Key Findings](#key-findings1)
-* [Training Information](#training-information)
-* [Analysis of Winning Solutions](#winning-solutions)
-* [Ideas for Improving](#improving)
-
----
-
-<!-- Key Findings1 -->
-### Key Findings:
-
-<!-- keypoint bbox -->
-#### Accurate BBox Proposals are KEY:
 According to takuoko and tascj, the team of 2 who placed 1st: "We decided to 
 build a solution using box-based instance segmentation, and focus more on the
 bbox detection part. We think the mask prediction performance is mainly limited
 by annotation quality so we did not pay much attention to it." [[1]](#1). For 
 the task of Cell Instance Segmentation, I believe this is a key insight. When 
-predicting a small amount of large objects, such as a person or cat in the
-center of the frame, I belive it's the mask prediction that can often lack
-behind often not having pixel perfect borders. But, given the small and clumped 
-together nature of the Cort and SH-SY5Y cell line along with the non-convex and
-heavily overlapping nature of the Astro cell line, a single vanilla ResNet50 
-based Mask R-CNN severely lacks in its ability to propose accurate BBox's for
-small and compact cells due to its exhaustive Anchor Generating nature. For
-BBox proposals, the top 2 winning solutions [[1]](#1) [[2]](#2) both used
-multiple BBox Heads followed by a Weighted Box Fusion (WBF) ensemble. 
-
-*PUT SOME IMAGES EXPLAINING BBOX PROBLEMS*
+predicting a small amount of low density large objects, such as a person or cat 
+in the center of the frame, I belive it's the mask prediction that can often lack
+behind often not having pixel perfect borders. But, given the small and high density 
+nature of these cell populations, a single vanilla ResNet50 based Mask R-CNN severely 
+lacks in its ability to generate accurate BBox's do to its exhaustive Anchor Generating 
+nature. For BBox proposals, the top 2 winning solutions [[1]](#1) [[2]](#2) both used 
+multiple, non-exhaustive BBox Heads (such as YOLOX) followed by a Weighted Box Fusion 
+(WBF) ensemble. 
 
 ---
 
-<!-- keypoint annotations -->
-#### Annotations are NOT Pixel Perfect:
+</details>
+
+<details>
+   <summary><b>Annotations are NOT Pixel Perfect:</b></summary>
+
 As highlighted above, although mask prediction may be largely limited by
 annotation quality. A few of the Astrocyte annoations are not pixel perfect and
 some I would even consider potentially damaging to a models perforance. The
-main recuring problem I saw with astrocyte masks was that some were hollow. As
-an example: 
+main recuring problem I saw with astrocyte masks was that some were hollow. 
+Though in my non-professional opinion there were a couple images that seemed
+to be missing signifacant annotations (see ID: 3bcc8ba1dc17). As an example
+of an image with hollow artifacts:
 
 <p align="center">
- <img src="./img/annotation_not_pp_examples/hollow_artifact.png" width="65%">
+    <img src="./img/annotation_not_pp_examples/hollow_artifact.png" width="65%">
 </p>
 
 This lead some people to try and *clean* these astro masks [[4]](#4). Though
-one problem discussed, if these problems lie in the training set then they also
+one problem discussed is that if these problems lie in the training set then they also
 probably lie in the competition testing set. That said, I never tried training
-with a *cleaned* set but I wonder what kind of perforance gains one might see 
+with a *cleaned* set but I do wonder what kind of perforance gains one might see 
 if they spent a day meticulously going through and re-drawing each Astro mask
 by hand with near pixel perfect borders.
 
@@ -164,8 +146,13 @@ Some image ids with hollow artifacts or *potential* missing masks:
 
 ---
 
-<!-- keypoint distribution -->
-#### There is an Uneven Distribution of Cell Types:
+</details>
+
+
+<details>
+   <summary><b>There is an Uneven Distribution of Cell Types:</b></summary>
+
+
 In the training set there are 320 Cort (~52.81%), 155 SH-SY5Y (~25.58%), and 131 (~21.62%) Astro cell images. 
 My model performance on each cell type can be seen here: 
 
@@ -176,26 +163,26 @@ My model performance on each cell type can be seen here:
 | Mask R-CNN R50-FPN    | 0.3869 | 0.1879  | 0.1914    | 0.2893                   | 0.306     |
 | CellPose w/ SizeModel | 0.3924 | 0.2274  | 0.1865    | 0.2975                   | 0.312     |
 
-Both models performed much better on the Cort cell line than the SH-SY5Y and Astro cell line. Though both my
+Both models performed much better on the Cort cell line than the SH-SY5Y and Astro cell line. Also, both my
 models had a positive LB correlation (roughly about +0.015) leading me to believe there *might* (pure specalation
 here) be a larger distribution of the Cort cell type in the private testing data than our training data. As seen
-by comments in this post [[5]](#5) many people were also experiencing strong positive LB correlation. I will explore
-another possible explanation for this positive LB correlation in the next *Key Finding*.
+by comments in this post [[5]](#5) many people were also experiencing strong positive LB correlation (some people 
+were even getting upwards of 0.03 gains). 
+
 
 ---
 
-<!-- keypoint cellpose pp -->
-#### Cellpose is Good at Identifying Instances But Not at Pixel Perfect Predictions:
-<!-- very subjective to tuning hyperparams -->
-<!-- graph of each model performance on each cell for mask rcnn and cellpose -->
+</details>
 
-Need to do.
-
-
-
-<br />
 
 ---
+
+<!-- Information -->
+## Competition Information:
+* [Data](#data)
+* [Training Information](#training-information)
+* [Analysis of Winning Solutions](#winning-solutions)
+* [Ideas for Improving](#improving)
 
 <!-- DATA -->
 ### Data:
@@ -278,25 +265,11 @@ Inferance: https://github.com/ryanirl/data-analysis-projects/blob/main/cell_inst
 ---
 
 <!-- Winning Solutions -->
-### Analysis of Winning Solutions:
+### Winning Solutions:
 
+Here are links to winners explanation of their models and solutions:
 
-Need to do.
-
-
----
-
-
-<!-- Improving -->
-### Ideas for Improvment:
-
-**WORK IN PROGESS**
-
-- Better / Smarter BBox Proposal
-- Larger Resize of Images
-- U-Net replacing Mask Head
-- Better dealing with overlap
-
+1. *todo*
 
 ---
 
