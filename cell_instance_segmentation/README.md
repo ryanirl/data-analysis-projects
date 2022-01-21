@@ -96,6 +96,8 @@ Expand each key finding for a detailed analysis of each.
 <details>
    <summary>Accurate BBox Proposals are KEY:</summary>
 
+<br />
+
 According to takuoko and tascj, the team of 2 who placed 1st: "We decided to 
 build a solution using box-based instance segmentation, and focus more on the
 bbox detection part. We think the mask prediction performance is mainly limited
@@ -120,6 +122,8 @@ multiple, non-exhaustive BBox Heads (such as YOLOX) followed by a Weighted Box F
 
 <details>
    <summary>Cell Size and Count:</summary>
+
+<br />
 
 | Cell Size    | Cort                                | SH-SY5Y                               | Astocytes                            |
 | ------------ | ----------------------------------- | ------------------------------------- | ------------------------------------ |
@@ -150,6 +154,8 @@ multiple, non-exhaustive BBox Heads (such as YOLOX) followed by a Weighted Box F
 
 <details>
    <summary>Annotations are NOT Pixel Perfect:</summary>
+
+<br />
 
 As highlighted above, although mask prediction may be largely limited by
 annotation quality. A few of the Astrocyte annoations are not pixel perfect and
@@ -192,13 +198,15 @@ Some image ids with hollow artifacts or *potential* missing masks:
 <details>
    <summary>There is an Uneven Distribution of Cell Types:</summary>
 
+<br />
+
+<p align="center">
+    <img src="./img/cell_type_distribution.png" width="50%">
+</p>
 
 In the training set there are 320 Cort (~52.81%), 155 SH-SY5Y (~25.58%), and 131 (~21.62%) Astro cell images. 
 My model performance on each cell type can be seen here: 
 
-<p align="center">
-    <img src="./img/cell_type_distribution.png" width="65%">
-</p>
 
 | Model                 | Cort   | SH-SY5Y | Astrocyte | MAP IoU @<br>[0.5, 0.95] | LB Public |
 | --------------------- | ------ | ------- | --------- | ------------------------ | --------- |
@@ -263,13 +271,20 @@ the original training set.
 <!-- Training Information -->
 ### Training Information:
 
+**Cellpose:**
+
+*TODO*
+
+
 **Mask R-CNN R50 FPN:**
 
 Each trained multiple models, here are details about my highest performing model. Each model was first trained
 on the LIVECELL Dataset then transfered to the smaller Sartorius Dataset. This gave me a 2% improvement overall
 from models that weren't first trained on LIVECELL.
 
-**Training Details:**
+<details>
+   <summary><b>Training Details</b></summary>
+
 - Epochs: 100 -> 50 (100 on LIVECELL -> 50 on Sartorius)
 - Batch Size: 2
 - LR: 0.0005
@@ -279,8 +294,11 @@ from models that weren't first trained on LIVECELL.
 - N Classes: 8 -> 3 
 - Detections per Image: 1000
 
+</details>
 
-**Inference Details:**
+
+<details>
+   <summary><b>Inference & Tuning Details</b></summary>
 
 - Custom NMS: 
     - Astrocyte: 0.4
@@ -297,8 +315,10 @@ from models that weren't first trained on LIVECELL.
     - SH-SY5Y: 0.5
     - Cort: 0.45
 
+</details>
 
-**See here for more details:**
+
+*See here for code:*
 
 Training: https://github.com/ryanirl/data-analysis-projects/blob/main/cell_instance_segmentation/src/d2_train.py
 
@@ -312,7 +332,7 @@ Inferance: https://github.com/ryanirl/data-analysis-projects/blob/main/cell_inst
 
 Here are links to winners explanation of their models and solutions:
 
-1. *todo*
+*TODO*
 
 ---
 
