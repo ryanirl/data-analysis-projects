@@ -85,12 +85,16 @@ my analysis.
 ---
 
 <!-- Key Findings -->
-### Key Findings: 
+### Key Findings & Analysis: 
+
+*WORK IN PROGRESS*
 
 Expand each key finding for a detailed analysis of each. 
 
+#### Model Performance Findings:
+
 <details>
-   <summary><b>Accurate BBox Proposals are KEY:</b></summary>
+   <summary>Accurate BBox Proposals are KEY:</summary>
 
 According to takuoko and tascj, the team of 2 who placed 1st: "We decided to 
 build a solution using box-based instance segmentation, and focus more on the
@@ -110,8 +114,42 @@ multiple, non-exhaustive BBox Heads (such as YOLOX) followed by a Weighted Box F
 
 </details>
 
+
+
+#### EDA Findings:
+
 <details>
-   <summary><b>Annotations are NOT Pixel Perfect:</b></summary>
+   <summary>Cell Size and Count:</summary>
+
+| Cell Size    | Cort                                | SH-SY5Y                               | Astocytes                            |
+| ------------ | ----------------------------------- | ------------------------------------- | ------------------------------------ |
+| Distribution | ![](./img/size_count/cort_size.png) | ![](./img/size_count/shsy5y_size.png) | ![](./img/size_count/astro_size.png) |
+| Count        | 10777.00                            | 52286.00                              | 10522.00                             |
+| Mean         | 240.16                              | 224.50                                | 905.81                               |
+| STD          | 139.17                              | 133.94                                | 855.19                               |
+| Min          | 33.00                               | 30.00                                 | 37.00                                |
+| Max          | 2054.00                             | 2254.00                               | 13327.00                             |
+
+
+| Cell Count   | Cort                                 | SH-SY5Y                                | Astocytes                             |
+| ------------ | ------------------------------------ | -------------------------------------- | ------------------------------------- |
+| Distribution | ![](./img/size_count/cort_count.png) | ![](./img/size_count/shsy5y_count.png) | ![](./img/size_count/astro_count.png) |
+| Count        | 320.00                               | 155.00                                 | 131.00                                |
+| Mean         | 33.68                                | 337.33                                 | 80.32                                 |
+| STD          | 16.50                                | 149.60                                 | 64.13                                 |
+| Min          | 4.00                                 | 49.00                                  | 5.00                                  |
+| Max          | 108.00                               | 790.00                                 | 594.00                                |
+
+
+
+---
+
+</details>
+
+
+
+<details>
+   <summary>Annotations are NOT Pixel Perfect:</summary>
 
 As highlighted above, although mask prediction may be largely limited by
 annotation quality. A few of the Astrocyte annoations are not pixel perfect and
@@ -149,14 +187,18 @@ Some image ids with hollow artifacts or *potential* missing masks:
 </details>
 
 
+
+
 <details>
-   <summary><b>There is an Uneven Distribution of Cell Types:</b></summary>
+   <summary>There is an Uneven Distribution of Cell Types:</summary>
 
 
 In the training set there are 320 Cort (~52.81%), 155 SH-SY5Y (~25.58%), and 131 (~21.62%) Astro cell images. 
 My model performance on each cell type can be seen here: 
 
-*Insert image of data distribution*
+<p align="center">
+    <img src="./img/cell_type_distribution.png" width="65%">
+</p>
 
 | Model                 | Cort   | SH-SY5Y | Astrocyte | MAP IoU @<br>[0.5, 0.95] | LB Public |
 | --------------------- | ------ | ------- | --------- | ------------------------ | --------- |
@@ -181,8 +223,9 @@ were even getting upwards of 0.03 gains).
 ## Competition Information:
 * [Data](#data)
 * [Training Information](#training-information)
-* [Analysis of Winning Solutions](#winning-solutions)
-* [Ideas for Improving](#improving)
+* [Winning Solutions](#winning-solutions)
+
+---
 
 <!-- DATA -->
 ### Data:
