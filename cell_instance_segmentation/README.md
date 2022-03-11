@@ -1,14 +1,14 @@
 # Cell Instance Segmentation
 
 Cell instance segmentation is the segmentation and detection of individual
-cells (see image below). One possible application where this can be particularly 
-useful is for studying how particular cells may or may not react to various
-treatments. However, segmenting instances of cells accurately by hand is a
-tedious and time-consuming task.
+cells (see image below) in microscopy imaging. This can be particularly useful 
+for studying how particular cells may or may not react to various treatments.
+Segmenting instances of cells accurately by hand is a tedious and time-consuming 
+task.
 
 This project follows from the "Sartorius Cell Instance Segmentation" Kaggle
-competition, and aims to benchmark and analyzes current SOTA instance 
-segmentation methods against the task of accurately segmenting and detecting
+competition [[6]](#6), and aims to benchmark and analyzes current SOTA instance 
+segmentation methods against the task of accurately detecting and segmenting 
 individual cells.
 
 
@@ -17,46 +17,57 @@ individual cells.
 
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
-* [Summary](#Summary)
-    * [Models Evaluated & Performance](#models-evaluated-and-performance)
-    * [Key Findings](#key-findings0)
-* [Competition Information](#information)
-    * [Data](#data)
-    * [Training Information](#training-information)
-    * [Winning Solutions](#winning-solutions)
+* [Summary](#summary)
+    * [General Information](#general-information)
+    * [Models Performance](#models-performance)
+* [Data](#data)
+    * [Information](#information)
+    * [EDA and Findings](#eda-and-findings)
+* [Models](#models)
+    * [Information and Analysis](#information-and-analysis)
+* [Final Words](#final-words)
 * [References](#references)
 * [License](#license)
 
 Follows from the Kaggle competition here:
 https://www.kaggle.com/c/sartorius-cell-instance-segmentation
 
-**Dependencies:** Pandas, Numpy, Matplotlib, SKLearn, SciPy, Detectron2,
+**Dependencies:** Pandas, Numpy, Matplotlib, Seaborn, SKLearn, SciPy, Detectron2,
 PyYAML, cv2, Cellpose, PyTorch, pycocotools, fastcore, joblib, and tqdm.
 
 ---
 
-
 <!-- Summary -->
 ## Summary 
 
-<!-- Models Evaluated and Performance -->
-### Models Evaluated & Performance
+<!-- General Information -->
+### General Information
 
-More detailed tables of my Model Performance can be found 
-[here](https://github.com/ryanirl/data-analysis-projects/blob/main/cell_instance_segmentation/MODEL_PERFORMANCE.md):
+The Sartorius data consists of 3 cell types: Astroctyes ("astro"), SH-SY5Y
+("shsy5y"), and Cort ("cort"). We must detect individual cell types in an 
+image and accurately segment each cell instance.
+
+For this competition trained and am analyzing 2 models: a ResNet50 Mask R-CNN [[7]](#7) and the 
+CellPose [[8]](#8) model.
 
 
+<!-- Models Performance -->
+### Models Performance
+
+
+
+<!-- Metric -->
 #### Evaluation Metric:
 
-We evaluate the Precision of the IoU at different thresholds in the range 
-[0.5, 0.95] with a step size of 0.05, and then took the Mean Average of 
-each Precision to get the MAP IoU Score. 
+We evaluate the precision of the intersection over union (IoU) at different 
+thresholds within the range [0.5, 0.95] with a step size of 0.05. Then take 
+the mean average of each precision to get the MAP IoU metric score. 
 
-**Side Note:** To understand the low AP scores at an IoU threshold of 0.9 consider 
-reading this discussion: 
-https://www.kaggle.com/c/sartorius-cell-instance-segmentation/discussion/281205 
+**Note #1:** To understand the low AP scores at an IoU threshold of 0.9 consider 
+reading this discussion [here](https://www.kaggle.com/c/sartorius-cell-instance-segmentation/discussion/281205).
 
-#### Model Scores:
+<!-- Scores -->
+#### Scores:
 
 | Model                 | AP @ IoU<br>0.5 | AP @ IoU<br>0.75 | AP @ IoU<br>0.9 | MAP IoU @<br>[0.5, 0.95] | LB Public | 
 | --------------------- | --------------- | ---------------- | --------------- | ------------------------ | --------- | 
@@ -64,17 +75,16 @@ https://www.kaggle.com/c/sartorius-cell-instance-segmentation/discussion/281205
 | CellPose w/ SizeModel | 0.6187          | 0.2491           | 0.0103          | 0.2975                   | 0.312     | 
 
 
-#### Cell Specific Scores (CV):
-
 | Model                 | Cort   | SH-SY5Y | Astrocyte | 
 | --------------------- | ------ | ------- | --------- |
 | Mask R-CNN R50-FPN    | 0.3869 | 0.1879  | 0.1914    |
 | CellPose w/ SizeModel | 0.3924 | 0.2274  | 0.1865    |
 
 
-**Side Note:** Though in my analysis I only show the IoU Score at an AP of [0.5, 0.75, 0.9], the public LB 
+**Note #2:** Though in my analysis I only show the IoU Score at an AP of [0.5, 0.75, 0.9], the public LB 
 is calculated through MAP's of [0.5, 0.55, ..., 0.9, 0.95], I just didn't feel the need to list each one in 
-my analysis.
+my summary. The detailed tables of my model performance can be found 
+[here](https://github.com/ryanirl/data-analysis-projects/blob/main/cell_instance_segmentation/MODEL_PERFORMANCE.md).
 
 
 #### Sample Predictions:
@@ -82,43 +92,49 @@ my analysis.
 ![](./img/astro_analysis_annotated.png)
 
 
+
 ---
 
-<!-- Key Findings -->
-### Key Findings & Analysis: 
+<!-- Data -->
+## Data:
+
+<!-- Data Information -->
+### Information 
+
+Data in this competition was given in the form of Testing, Training, Train Semi
+Supervised, and LIVECELL Data. The data can be downloaded from the Kaggle website
+linked at the top of this repo.
+
+The Training, Testing, and Train Semi Supervised data consist of 3 cell types:
+1. Astroctyes ("astro")
+2. SH-SY5Y ("shsy5y")
+3. Cort ("cort")
+
+Though in this competition we're only tested on the 3 cell types listed above, the predecessor
+to competition dataset, the LIVECELL dataset, is also given and contains 8 Cell Types. Of the 8 
+extra cell lines, the only one that overlaps with the training data is the SH-SY5Y cell line. 
+The SH-SY5Y data in the LIVECELL Dataset IS seperate from the data we are given in the competition. 
+The other 7 Cell Types in the LIVECELL Data are:
+1. A172
+2. BT474
+3. BV-2
+4. Huh7
+5. MCF7
+6. SkBr3
+7. SK-OV-3
+
+The extra data in the LIVECELL dataset will almost surely be utilized during training to 
+acheive higher scores, some ideas include:
+1. Combining the addition data from the SH-SY5Y cell line in the LIVECELL dataset.
+2. First training on the larger LIVECELL dataset then transer learning that model to 
+the original training set. 
+
+<!-- Data EDA -->
+### EDA and Findings: 
 
 *WORK IN PROGRESS*
 
 Expand each key finding for a detailed analysis of each. 
-
-#### Model Performance Findings:
-
-<details>
-   <summary>Accurate BBox Proposals are KEY:</summary>
-
-<br />
-
-According to takuoko and tascj, the team of 2 who placed 1st: "We decided to 
-build a solution using box-based instance segmentation, and focus more on the
-bbox detection part. We think the mask prediction performance is mainly limited
-by annotation quality so we did not pay much attention to it." [[1]](#1). For 
-the task of Cell Instance Segmentation, I believe this is a key insight. When 
-predicting a small amount of low density large objects, such as a person or cat 
-in the center of the frame, I belive it's the mask prediction that can often lack
-behind often not having pixel perfect borders. But, given the small and high density 
-nature of these cell populations, a single vanilla ResNet50 based Mask R-CNN severely 
-lacks in its ability to generate accurate BBox's do to its exhaustive Anchor Generating 
-nature. For BBox proposals, the top 2 winning solutions [[1]](#1) [[2]](#2) both used 
-multiple, non-exhaustive BBox Heads (such as YOLOX) followed by a Weighted Box Fusion 
-(WBF) ensemble. 
-
----
-
-</details>
-
-
-
-#### EDA Findings:
 
 <details>
    <summary>Cell Size and Count:</summary>
@@ -151,50 +167,6 @@ multiple, non-exhaustive BBox Heads (such as YOLOX) followed by a Weighted Box F
 </details>
 
 
-
-<details>
-   <summary>Annotations are NOT Pixel Perfect:</summary>
-
-<br />
-
-As highlighted above, although mask prediction may be largely limited by
-annotation quality. A few of the Astrocyte annoations are not pixel perfect and
-some I would even consider potentially damaging to a models perforance. The
-main recuring problem I saw with astrocyte masks was that some were hollow. 
-Though in my non-professional opinion there were a couple images that seemed
-to be missing signifacant annotations (see ID: 3bcc8ba1dc17). As an example
-of an image with hollow artifacts:
-
-<p align="center">
-    <img src="./img/annotation_not_pp_examples/hollow_artifact.png" width="65%">
-</p>
-
-This lead some people to try and *clean* these astro masks [[4]](#4). Though
-one problem discussed is that if these problems lie in the training set then they also
-probably lie in the competition testing set. That said, I never tried training
-with a *cleaned* set but I do wonder what kind of perforance gains one might see 
-if they spent a day meticulously going through and re-drawing each Astro mask
-by hand with near pixel perfect borders.
-
-Another noteable problem with the masks not being pixel perfect is how strict
-the MAP IoU metric is at a threshold of above ~0.85. Though I will refer you 
-to this Kaggle post that describes the problem very nicely:
-https://www.kaggle.com/c/sartorius-cell-instance-segmentation/discussion/281205 [[3]](#3)
-
-Some image ids with hollow artifacts or *potential* missing masks:
-- 3bcc8ba1dc17
-- 174793807517
-- 13325f865bb0
-- 182c3da676bd
-
-
----
-
-</details>
-
-
-
-
 <details>
    <summary>There is an Uneven Distribution of Cell Types:</summary>
 
@@ -225,58 +197,74 @@ were even getting upwards of 0.03 gains).
 </details>
 
 
----
+<details>
+   <summary>Annotations are NOT Pixel Perfect:</summary>
 
-<!-- Information -->
-## Competition Information:
-* [Data](#data)
-* [Training Information](#training-information)
-* [Winning Solutions](#winning-solutions)
+<br />
 
----
+Although mask prediction may be largely limited by
+annotation quality. A few of the Astrocyte annotations are not pixel perfect and
+some I would even consider potentially damaging to a models perforance. The
+main recuring problem I saw with astrocyte masks was that some were hollow. 
+Though in my non-professional opinion there were also a couple images that seemed
+to be missing signifacant annotations (see ID: 3bcc8ba1dc17). As an example
+of an image with hollow artifacts:
 
-<!-- DATA -->
-### Data:
+<p align="center">
+    <img src="./img/annotation_not_pp_examples/hollow_artifact.png" width="65%">
+</p>
 
-Data in this competition was given in the form of Testing, Training, Train Semi
-Supervised and LIVECELL Data. 
+This lead some people to try and *clean* these astro masks [[4]](#4). Though
+one problem discussed is that if these problems lie in the training set then they also
+probably lie in the competition testing set. That said, I never tried training
+with a *cleaned* set but I do wonder what kind of perforance gains one might see 
+if they spent a day meticulously going through and re-annotated the Astro masks
+by hand as well as they could. 
 
-The Training, Testing, and Train Semi Supervised data consist of 3 cell types:
-1. Astroctyes ("astro")
-2. SH-SY5Y ("shsy5y")
-3. Cort ("cort")
+Another noteable problem with the masks not being pixel perfect is how strict
+the MAP IoU metric is at a threshold of above ~0.85. Though I will refer you 
+to this Kaggle discussion that describes this problem very nicely:
+https://www.kaggle.com/c/sartorius-cell-instance-segmentation/discussion/281205 [[3]](#3)
 
-Though in this competition we're only tested on the 3 cell types listed above, the predecessor
-to competition dataset, the LIVECELL dataset, is also given and contains 8 Cell Types. Of the 8 
-extra cell lines, the only one that overlaps with the training data is the SH-SY5Y cell line. 
-The SH-SY5Y data in the LIVECELL Dataset IS seperate from the data we are given in the competition. 
-The other 7 Cell Types in the LIVECELL Data are:
-1. A172
-2. BT474
-3. BV-2
-4. Huh7
-5. MCF7
-6. SkBr3
-7. SK-OV-3
-
-The extra data in the LIVECELL dataset will almost surely be utilized in training to 
-acheive high scores, some ideas include:
-1. Combining the addition data from the SH-SY5Y cell line in the LIVECELL dataset.
-2. First Training on the larger LIVECELL dataset then Transer Learning that model to 
-the original training set. 
+Some image ids with hollow artifacts or *potential* missing masks:
+- 3bcc8ba1dc17
+- 174793807517
+- 13325f865bb0
+- 182c3da676bd
 
 
 ---
 
-<!-- Training Information -->
-### Training Information:
+</details>
 
-**Cellpose:**
+
+---
+
+
+<!-- Models -->
+## Models
+
+<!-- Models Information -->
+### Information and Analysis
+
+<details>
+   <summary>CellPose</summary>
+
+<br />
 
 *TODO*
 
+---
 
-**Mask R-CNN R50 FPN:**
+</details>
+
+
+
+<details>
+   <summary>Mask R-CNN R50 FPN</summary>
+
+<br />
+
 
 Each trained multiple models, here are details about my highest performing model. Each model was first trained
 on the LIVECELL Dataset then transfered to the smaller Sartorius Dataset. This gave me a 2% improvement overall
@@ -284,6 +272,8 @@ from models that weren't first trained on LIVECELL.
 
 <details>
    <summary><b>Training Details</b></summary>
+
+<br />
 
 - Epochs: 100 -> 50 (100 on LIVECELL -> 50 on Sartorius)
 - Batch Size: 2
@@ -319,20 +309,51 @@ from models that weren't first trained on LIVECELL.
 
 
 *See here for code:*
+- [Training](https://github.com/ryanirl/data-analysis-projects/blob/main/cell_instance_segmentation/src/d2_train.py)
+- [Inference](https://github.com/ryanirl/data-analysis-projects/blob/main/cell_instance_segmentation/src/detectron2_src/d2_config.yaml)
 
-Training: https://github.com/ryanirl/data-analysis-projects/blob/main/cell_instance_segmentation/src/d2_train.py
 
-Inferance: https://github.com/ryanirl/data-analysis-projects/blob/main/cell_instance_segmentation/src/detectron2_src/d2_config.yaml
+#### Mask R-CNN Analysis and Findings:
+
+<details>
+   <summary>Accurate BBox Proposals are KEY:</summary>
+
+<br />
+
+According to takuoko and tascj, the team of 2 who placed 1st: "We decided to 
+build a solution using box-based instance segmentation, and focus more on the
+bbox detection part. We think the mask prediction performance is mainly limited
+by annotation quality so we did not pay much attention to it." [[1]](#1). For 
+the task of Cell Instance Segmentation, I believe this is a key insight. When 
+predicting a small amount of low density large objects, such as a person or cat 
+in the center of the frame, I belive it's the mask prediction that can often lack
+behind often not having pixel perfect borders. But, given the small and high density 
+nature of these cell populations, a single vanilla ResNet50 based Mask R-CNN severely 
+lacks in its ability to generate accurate BBox's do to its exhaustive Anchor Generating 
+nature. For BBox proposals, the top 2 winning solutions [[1]](#1) [[2]](#2) both used 
+multiple, non-exhaustive BBox Heads (such as YOLOX) followed by a Weighted Box Fusion 
+(WBF) ensemble. 
+
+---
+
+</details>
 
 
 ---
 
-<!-- Winning Solutions -->
-### Winning Solutions:
+</details>
 
-Here are links to winners explanation of their models and solutions:
+---
 
-*TODO*
+
+<!-- Final -->
+## Final Words:
+
+For more information on the **winners** and additional key **takeaways** from this
+competition check out this post:
+
+- https://www.kaggle.com/c/sartorius-cell-instance-segmentation/discussion/299036
+
 
 ---
 
@@ -349,7 +370,11 @@ Here are links to winners explanation of their models and solutions:
 
 <a id = "5">[5]</a>: Sirius (Nov. 2021). "Best Single Model". *Kaggle*. https://www.kaggle.com/c/sartorius-cell-instance-segmentation/discussion/289033
 
+<a id = "6">[6]</a>: Sartorius - Cell Instance Segmentation (Sep. 2021). *Kaggle*. https://www.kaggle.com/c/sartorius-cell-instance-segmentation
 
+<a id = "7">[7]</a>: He, Kaiming, et al. (2017). "Mask r-cnn." Proceedings of the IEEE international conference on computer vision. 
+
+<a id = "8">[8]</a>: Stringer, C., Wang, T., Michaelos, M. et al. (2021). "Cellpose: a generalist algorithm for cellular segmentation. Nat Methods 18, 100-106. https://doi.org/10.1038/s41592-020-01018-x
 
 ---
 
