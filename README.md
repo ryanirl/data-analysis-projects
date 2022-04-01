@@ -44,13 +44,6 @@ SKLearn, SciPy, and categorical_encoders
 
 Link to Repo: https://github.com/ryanirl/data-analysis-projects/blob/main/cell_instance_segmentation
 
-**Models Evaluated & Performance:**
-
-In depth analysis of Model Performance and Postprocessing techniques can be 
-found here:
-
-*ADD LINK*
-
 ### Evaluation Metric:
 
 We evaluate the Precision of the IoU at different thresholds in the range 
@@ -82,6 +75,26 @@ https://www.kaggle.com/c/sartorius-cell-instance-segmentation/discussion/281205
 
 **Dependencies:** Pandas, Numpy, Matplotlib, SKLearn, SciPy, detectron2,
 PyYAML, cv2, PyTorch, pycocotools, fastcore, joblib, and tqdm.
+
+---
+
+# Dimensionality Reduction on Genotypes
+
+
+**WORK IN PROGRESS**
+
+
+<p align="center">
+    <img src="./dimensionality_reduction_on_genotypes/img/chr_21_visualization_1.png" width="100%">
+</p>
+
+
+The goal of this project is to use common dimensionality reduction techniques
+such as PCA, t-SNE, and UMAP to infer ancestery from individuals genotype.
+Data is given in the form of a VCF (Variant Call Format) file containing
+variants such as single nucleotide polymorphism's (SNP's), insertion/deletions 
+(INDEL's), and more. 
+
 
 ---
 
