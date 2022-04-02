@@ -1,5 +1,16 @@
 # Dimensionality Reduction on Genotypes
 
+The goal of this project is to use common dimensionality reduction techniques
+such as PCA, t-SNE, and UMAP to infer ancestery from individual genotypes.
+Given that the genotype of any two individuals is roughly 99.9% alike, we would
+like to pick out what is different (the variants) and do dimensionality
+reduction on those parts of the genome. Today, we identify these variants
+through a process called variant calling. In this project, the data is from
+1000 Genomes Project [[2]](#2) and is given in the form of a VCF (Variant Call
+Format) file containing variants at various loci on an individual's
+chromosome. Such variants inlcude single nucleotide polymorphisms (SNPs) or
+structural variants (SVs) such as insertion/deletions (INDEL's) and more. 
+
 <p align="center">
     <img src="./img/chr_21_visualization_1.png" width="100%">
 </p>

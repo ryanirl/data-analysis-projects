@@ -1,11 +1,14 @@
 # Car Price Regression
 
-Covers the data gathering, cleaning, EDA, feature engineering, and model prediction of automobile prices. This project was 
-inspired by my first every python project (https://github.com/ryanirl/CraigslistScraper), though the actual dataset used in the notebook is 
-a kaggle dataset found here: https://www.kaggle.com/austinreese/craigslist-carstrucks-data. Big shout out to Austin Reese for taking the
-time to compile this dataset and make it public as it contains 400,000+ datapoints. Random Forest Regressor (vanilla) was the best performing 
-model and managed to achieve an R2 Score of 0.931. 
-
+Notebook covering the data gathering, cleaning, EDA, feature engineering, and
+prediction of automobile prices. This project was inspired by my first every
+python project (https://github.com/ryanirl/CraigslistScraper), though the
+actual dataset used in the notebook is a kaggle dataset that can be found here:
+https://www.kaggle.com/austinreese/craigslist-carstrucks-data. Big shout out to
+Austin Reese for taking the time to compile this large dataset of 400,000+
+craigslist ads and make it public. Without hyperparameter tuning, Random Forest 
+Regressor (vanilla) was the best performing model and managed to achieve an R2 
+Score of 0.931 on the test set. 
 
 **Models Evaluated & Performance:**
 
@@ -23,7 +26,6 @@ model and managed to achieve an R2 Score of 0.931.
 
 
 **Dependencies:** Pandas, Numpy, Seaborn, Matplotlib, XGBoost, LightGBM, SKLearn, SciPy, and categorical_encoders 
-
 
 ---
 

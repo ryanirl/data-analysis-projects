@@ -7,13 +7,14 @@
 Link to Notebook: https://github.com/ryanirl/data-analysis-projects/blob/main/car_price_prediction/car_price_prediction.ipynb
 
 Notebook covering the data gathering, cleaning, EDA, feature engineering, and
-model prediction of automobile prices. This project was inspired by my first
-every python project (https://github.com/ryanirl/CraigslistScraper), though the
-actual dataset used in the notebook is a kaggle dataset found here:
+prediction of automobile prices. This project was inspired by my first every
+python project (https://github.com/ryanirl/CraigslistScraper), though the
+actual dataset used in the notebook is a kaggle dataset that can be found here:
 https://www.kaggle.com/austinreese/craigslist-carstrucks-data. Big shout out to
-Austin Reese for taking the time to compile this dataset and make it public as
-it contains 400,000+ craigslist ads. Random Forest Regressor (vanilla) was the
-best performing model and managed to achieve an R2 Score of 0.931. 
+Austin Reese for taking the time to compile this large dataset of 400,000+
+craigslist ads and make it public. Without hyperparameter tuning, Random Forest 
+Regressor (vanilla) was the best performing model and managed to achieve an R2 
+Score of 0.931 on the test set. 
 
 
 **Models Evaluated & Performance:**
@@ -34,8 +35,6 @@ best performing model and managed to achieve an R2 Score of 0.931.
 SKLearn, SciPy, and categorical_encoders 
 
 
-<br />
-
 ---
 
 ## 2. Cell Instance Segmentation
@@ -44,15 +43,21 @@ SKLearn, SciPy, and categorical_encoders
 
 Link to Repo: https://github.com/ryanirl/data-analysis-projects/blob/main/cell_instance_segmentation
 
+Cell instance segmentation is the segmentation and detection of individual
+cells (see image below) in microscopy imaging. This can be particularly useful 
+for studying how particular cells may or may not react to various treatments.
+Segmenting instances of cells accurately by hand is a tedious and time-consuming 
+task. This project follows from the "Sartorius Cell Instance Segmentation" Kaggle
+competition [[1]](#1), and aims to benchmark and analyzes the current thought to be SOTA 
+instance segmentation methods against the task of accurately detecting and 
+segmenting individual cells.
+
 ### Evaluation Metric:
 
-We evaluate the Precision of the IoU at different thresholds in the range 
-[0.5, 0.95] with a step size of 0.05, and then took the Mean Average of 
-each Precision to get the MAP IoU Score. 
-
-NOTES: To understand the low AP scores at an IoU threshold of 0.9 consider 
-reading this discussion:
-https://www.kaggle.com/c/sartorius-cell-instance-segmentation/discussion/281205
+The metric for this competition is the MAP IoU score. That is, we evaluate the
+Precision of the IoU at different thresholds in the range [0.5, 0.95] at a step
+size of 0.05, and then take the Mean Average of each Precision to get the MAP
+IoU Score.
 
 **Scores:**
 
@@ -78,7 +83,7 @@ PyYAML, cv2, PyTorch, pycocotools, fastcore, joblib, and tqdm.
 
 ---
 
-# Dimensionality Reduction on Genotypes
+## 3. Dimensionality Reduction on Genotypes
 
 
 **WORK IN PROGRESS**
@@ -90,10 +95,29 @@ PyYAML, cv2, PyTorch, pycocotools, fastcore, joblib, and tqdm.
 
 
 The goal of this project is to use common dimensionality reduction techniques
-such as PCA, t-SNE, and UMAP to infer ancestery from individuals genotype.
-Data is given in the form of a VCF (Variant Call Format) file containing
-variants such as single nucleotide polymorphism's (SNP's), insertion/deletions 
-(INDEL's), and more. 
+such as PCA, t-SNE, and UMAP to infer ancestery from individual genotypes.
+Given that the genotype of any two individuals is roughly 99.9% alike, we would
+like to pick out what is different (the variants) and do dimensionality
+reduction on those parts of the genome. Today, we identify these variants
+through a process called variant calling. In this project, the data is from
+1000 Genomes Project [[2]](#2) and is given in the form of a VCF (Variant Call
+Format) file containing variants at various loci on an individual's
+chromosome. Such variants inlcude single nucleotide polymorphisms (SNPs) or
+structural variants (SVs) such as insertion/deletions (INDEL's) and more. 
+
+<br />
+
+**Dependencies:** Altair, Pysam, UMAP (umap-learn), Pandas, Numpy, 
+SKLearn, SciPy, and tqdm.
+
+---
+
+<!-- References -->
+## References:
+
+<a id = "1">[6]</a>: Sartorius - Cell Instance Segmentation (Sep. 2021). *Kaggle*. https://www.kaggle.com/c/sartorius-cell-instance-segmentation
+
+<a id = "2">[2]</a>: 1000 Genomes Project Consortium, Auton, A., Brooks, L. D., Durbin, R. M., Garrison, E. P., Kang, H. M., Korbel, J. O., Marchini, J. L., McCarthy, S., McVean, G. A., & Abecasis, G. R. (2015). A global reference for human genetic variation. Nature, 526(7571), 6874. https://doi.org/10.1038/nature15393
 
 
 ---
