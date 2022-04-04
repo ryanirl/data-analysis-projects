@@ -48,18 +48,17 @@ cells (see image below) in microscopy imaging. This can be particularly useful
 for studying how particular cells may or may not react to various treatments.
 Segmenting instances of cells accurately by hand is a tedious and time-consuming 
 task. This project follows from the "Sartorius Cell Instance Segmentation" Kaggle
-competition [[1]](#1), and aims to benchmark and analyzes the current thought to be SOTA 
-instance segmentation methods against the task of accurately detecting and 
+competition [[1]](#1), and aims to benchmark and analyzes two current thought to be 
+SOTA instance segmentation methods against the task of accurately detecting and 
 segmenting individual cells.
 
-### Evaluation Metric:
+**Evaluation Metric**: The metric used in this competition is the MAP IoU 
+score. This is calculated by evaluating the precision of the intersection over 
+union (IoU) at different thresholds within the range [0.5, 0.95] at a step 
+size of 0.05. Then the mean average of each precision is found to get the MAP 
+IoU metric score. 
 
-The metric for this competition is the MAP IoU score. That is, we evaluate the
-Precision of the IoU at different thresholds in the range [0.5, 0.95] at a step
-size of 0.05, and then take the Mean Average of each Precision to get the MAP
-IoU Score.
-
-**Scores:**
+**Model Scores (LB):**
 
 | Model                 | AP @ IoU<br>0.5 | AP @ IoU<br>0.75 | AP @ IoU<br>0.9 | MAP IoU @<br>[0.5, 0.95] | LB Public | 
 | --------------------- | --------------- | ---------------- | --------------- | ------------------------ | --------- | 
@@ -90,7 +89,7 @@ PyYAML, cv2, PyTorch, pycocotools, fastcore, joblib, and tqdm.
 
 
 <p align="center">
-    <img src="./dimensionality_reduction_on_genotypes/img/chr_21_visualization_1.png" width="100%">
+    <img src="./dimensionality_reduction_on_genotypes/img/chr_21_visualization_1.svg" width="100%">
 </p>
 
 
@@ -99,7 +98,7 @@ such as PCA, t-SNE, and UMAP to infer ancestery from individual genotypes.
 Given that the genotype of any two individuals is roughly 99.9% alike, we would
 like to pick out what is different (the variants) and do dimensionality
 reduction on those parts of the genome. Today, we identify these variants
-through a process called variant calling. In this project, the data is from
+through a process called variant calling. In this project, the data is from the
 1000 Genomes Project [[2]](#2) and is given in the form of a VCF (Variant Call
 Format) file containing variants at various loci on an individual's
 chromosome. Such variants inlcude single nucleotide polymorphisms (SNPs) or
@@ -115,7 +114,7 @@ SKLearn, SciPy, and tqdm.
 <!-- References -->
 ## References:
 
-<a id = "1">[6]</a>: Sartorius - Cell Instance Segmentation (Sep. 2021). *Kaggle*. https://www.kaggle.com/c/sartorius-cell-instance-segmentation
+<a id = "1">[1]</a>: Sartorius - Cell Instance Segmentation (Sep. 2021). *Kaggle*. https://www.kaggle.com/c/sartorius-cell-instance-segmentation
 
 <a id = "2">[2]</a>: 1000 Genomes Project Consortium, Auton, A., Brooks, L. D., Durbin, R. M., Garrison, E. P., Kang, H. M., Korbel, J. O., Marchini, J. L., McCarthy, S., McVean, G. A., & Abecasis, G. R. (2015). A global reference for human genetic variation. Nature, 526(7571), 6874. https://doi.org/10.1038/nature15393
 
