@@ -1,10 +1,26 @@
 **/personal
 **/private
-jugular_paraganglioma_classification.ipynb
 plan.txt
 junk.txt
 
-**/data
+
+# Car Price Regression
+cleaned_features.csv
+cleaned_targets.csv
+
+
+# Diminsionality Reduction on Genotypes
+**/old_pca_genotype
+
+**/dimensionality_reduction_on_genotypes/data
+ALL.chr21.phase1_release_v3.20101123.snps_indels_svs.genotypes.vcf.gz
+ALL.chr22.phase1_release_v3.20101123.snps_indels_svs.genotypes.vcf.gz
+ALL.chr22.phase1_release_v3.20101123.snps_indels_svs.genotypes.vcf.gz.tb
+phase1_integrated_calls.20101123.ALL.panel
+
+vis_data.csv
+
+./dimensionality_reduction_on_genotypes/data/clean_data.csv
 
 
 # Created by https://www.toptal.com/developers/gitignore/api/jupyternotebooks,python,macos

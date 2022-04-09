@@ -1,9 +1,9 @@
 # Dimensionality Reduction on Genotypes
 
 The goal of this project is to use common dimensionality reduction techniques
-such as PCA, t-SNE, and UMAP to infer ancestery from individual genotypes.
-Given that the genotype of any two individuals is roughly 99.9% alike, we would
-like to pick out what is different (the variants) and do dimensionality
+such as PCA, t-SNE, and UMAP to infer ancestery from an individuals genotype.
+Given that the genotype of any two individuals (human) is roughly 99.9% alike, 
+we would like to pick out what is different (the variants) and do dimensionality
 reduction on those parts of the genome. Today, we identify these variants
 through a process called variant calling. In this project, the data is from the
 1000 Genomes Project [[2]](#2) and is given in the form of a VCF (Variant Call
@@ -28,7 +28,9 @@ I will be using a different dataset than the original paper and a different chro
 of the same dataset than Maria Nattestad used in her implementation. If you are following 
 along I also recommend you use a different dataset or the same dataset and a different 
 chromosome than either Maria Nattestad (Chr 22) or I (Chr 21) used. This data is from the 
-1000 Genomes Project [[2]](#2). The data I used can be downloaded via the following commands:
+1000 Genomes Project [[2]](#2). If you with to reproduce my results either take a look at 
+my notebooks, or you can utilize my pipline and look at look at `USAGE.md` for instructions.
+The data I used can be downloaded via the following commands:
 
 ```
 curl -O https://1000genomes.s3.amazonaws.com/release/20110521/ALL.chr21.phase1_release_v3.20101123.snps_indels_svs.genotypes.vcf.gz
@@ -36,8 +38,6 @@ curl -O https://1000genomes.s3.amazonaws.com/release/20110521/ALL.chr21.phase1_r
 curl -O https://1000genomes.s3.amazonaws.com/release/20110521/ALL.chr21.phase1_release_v3.20101123.snps_indels_svs.genotypes.vcf.gz.tbi
 
 curl -O https://1000genomes.s3.amazonaws.com/release/20110521/phase1_integrated_calls.20101123.ALL.panel
-
-curl -O ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/20131219.populations.tsv
 ```
 
 **NOTE**: If you want to use a different chromosome you can simply just change
