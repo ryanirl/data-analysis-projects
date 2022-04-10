@@ -84,19 +84,14 @@ PyYAML, cv2, PyTorch, pycocotools, fastcore, joblib, and tqdm.
 
 ## 3. Dimensionality Reduction on Genotypes
 
-
-**WORK IN PROGRESS**
-
-
 <p align="center">
     <img src="./dimensionality_reduction_on_genotypes/img/chr_21_visualization_1.svg" width="100%">
 </p>
 
-
 The goal of this project is to use common dimensionality reduction techniques
-such as PCA, t-SNE, and UMAP to infer ancestery from individual genotypes.
-Given that the genotype of any two individuals is roughly 99.9% alike, we would
-like to pick out what is different (the variants) and do dimensionality
+such as PCA, t-SNE, and UMAP to infer ancestery from an individuals genotype.
+Given that the genotype of any two individuals (human) is roughly 99.9% alike, 
+we would like to pick out what is different (the variants) and do dimensionality
 reduction on those parts of the genome. Today, we identify these variants
 through a process called variant calling. In this project, the data is from the
 1000 Genomes Project [[2]](#2) and is given in the form of a VCF (Variant Call

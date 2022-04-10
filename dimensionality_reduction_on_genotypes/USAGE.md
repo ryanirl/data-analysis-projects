@@ -1,7 +1,8 @@
 # Usage
 
-Assuming you have a mac, Python3, and all of the dependencies installed, you
-should be able to reproduce my resutls with the following commands: 
+Assuming you have a using MacOS and have Python3 with all of the dependencies
+installed, you should be able to reproduce my resutls with the following
+commands: 
 
 **Dependencies:** Altair, Pysam, UMAP (umap-learn), Pandas, NumPy, 
 SKLearn, SciPy, tqdm, and Seaborn.
