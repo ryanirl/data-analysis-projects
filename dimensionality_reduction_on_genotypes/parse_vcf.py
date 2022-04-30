@@ -18,8 +18,8 @@ def allele_indices(vcf_dir, skip_every = 5):
     Args:
         vcf_dir (string): Location of VCF file.
         skip_every (int): Only return every other "skip_every"
-        variant. This may be useful if you are running this
-        with less than 16GB of RAM.
+            variant. This may be useful if you are running this
+            with less than 16GB of RAM.
 
     Returns:
         list: List of each sample.
@@ -49,14 +49,14 @@ def parse_panel(panel_dir):
 
     Args:
         panel_dir (string): Location of the panel file 
-        containing information about each sample.
+            containing information about each sample.
 
     Returns:
         dict: Population map for each sample. For
-        example, {sample_id, population}.
+            example, {sample_id, population}.
 
         dict: Superpopulation map for each sample. For
-        example, {sample_id, superpopulation}.
+            example, {sample_id, superpopulation}.
 
     """
     population_map = {}  
@@ -88,10 +88,10 @@ def main(args):
     Args:
         --vcf_dir (string): Location of the VCF file.
         --panel_dir (string): Location of the Panel file containing
-        sample information.
+            sample information.
         --skip_every (int): Recommend using if you are limited in RAM. 
-        Samples every other N variants therefore cutting down on 
-        memory usage. 
+            Samples every other N variants therefore cutting down on 
+            memory usage. 
 
     Returns:
         None

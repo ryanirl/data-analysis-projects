@@ -8,7 +8,7 @@ reduction on those parts of the genome. Today, we identify these variants
 through a process called variant calling. In this project, the data is from the
 1000 Genomes Project [[2]](#2) and is given in the form of a VCF (Variant Call
 Format) file containing variants at various loci on an individual's
-chromosome. Such variants inlcude single nucleotide polymorphisms (SNPs) or
+chromosome. Such variants include single nucleotide polymorphisms (SNPs) or
 structural variants (SVs) such as insertion/deletions (INDEL's) and more. 
 
 <p align="center">
@@ -24,13 +24,14 @@ all of which can be found in the following links:
  - *Maria Nattestad's GitHub Repo*: https://github.com/MariaNattestad/pca-on-genotypes
 
 
-I will be using a different dataset than the original paper and a different chromosome 
-of the same dataset than Maria Nattestad used in her implementation. If you are following 
-along I also recommend you use a different dataset or the same dataset and a different 
-chromosome than either Maria Nattestad (Chr 22) or I (Chr 21) used. This data is from the 
-1000 Genomes Project [[2]](#2). If you with to reproduce my results either take a look at 
-my notebooks, or you can utilize my pipline and look at look at `USAGE.md` for instructions.
-The data I used can be downloaded via the following commands:
+For the data, I used a different dataset than the original paper and a
+different chromosome of the same dataset than Maria Nattestad used in her
+implementation. If you are following along I also recommend you use a different
+dataset or the same dataset and a different chromosome than either Maria
+Nattestad (Chr 22) or I (Chr 21) used. This data is from the 1000 Genomes
+Project [[2]](#2). If you with to reproduce my results either take a look at my
+notebooks, or you can utilize my pipline and look at look at `USAGE.md` for
+instructions.  The data I used can be downloaded via the following commands:
 
 ```
 curl -O https://1000genomes.s3.amazonaws.com/release/20110521/ALL.chr21.phase1_release_v3.20101123.snps_indels_svs.genotypes.vcf.gz

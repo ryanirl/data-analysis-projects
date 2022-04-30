@@ -222,11 +222,27 @@ Some image ids with hollow artifacts or *potential* missing masks:
 
 <br />
 
-*NEED TODO*
+CellPose [[8]](#8) is a UNet model that works via representation learning. That
+is, along with a binary mask, some other representation of the image is learned
+that we can derive an instance segmentation from. In this case, along with the
+binary mask, x and y flows are predicted that can be used to derive instance
+masks using gradient flow tracking.
 
-CellPose is a UNet model that works via representation learning. That being, along
-with a binary mask, x and y flows are predicted that can be used to derive instance
-masks using a gradient flow tracking method. 
+To learn more about Cellpose, check out the GitHub implementation or the paper:
+ - GitHub: https://github.com/MouseLand/cellpose
+ - Paper: https://www.nature.com/articles/s41592-020-01018-x
+
+Pros:
+ - Very easy to train.
+ - Performs well on high density objects (SH-SY5Y).
+ - Performs well on relatively convex objects (Cort and SH-SY5Y).
+ - Very lightweight, parameters are low. 
+ - Very good at distinguishing between 2 instances.
+
+Cons:
+ - Very sensitive to hyperparameters. 
+ - Predictions didn't seem to be pixel perfect. 
+ - Bad at non-concave masks (Astrocytes).
 
 ---
 
@@ -262,6 +278,8 @@ a 2% improvement overall from models that weren't only trained on LIVECELL.
 *See here for code:*
 - [Training](https://github.com/ryanirl/data-analysis-projects/blob/main/cell_instance_segmentation/src/d2_train.py)
 
+---
+
 </details>
 
 <details>
@@ -284,6 +302,8 @@ a 2% improvement overall from models that weren't only trained on LIVECELL.
 
 *See here for code:*
 - [Inference](https://github.com/ryanirl/data-analysis-projects/blob/main/cell_instance_segmentation/src/detectron2_src/d2_config.yaml)
+
+---
 
 </details>
 

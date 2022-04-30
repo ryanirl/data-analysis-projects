@@ -96,7 +96,7 @@ reduction on those parts of the genome. Today, we identify these variants
 through a process called variant calling. In this project, the data is from the
 1000 Genomes Project [[2]](#2) and is given in the form of a VCF (Variant Call
 Format) file containing variants at various loci on an individual's
-chromosome. Such variants inlcude single nucleotide polymorphisms (SNPs) or
+chromosome. Such variants include single nucleotide polymorphisms (SNPs) or
 structural variants (SVs) such as insertion/deletions (INDEL's) and more. 
 
 <br />
